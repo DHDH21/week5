@@ -65,11 +65,13 @@ body {
     border: 1px solid #88898C;
     border-top-right-radius: 15px;
     border-bottom-right-radius: 15px;
-    background-color: #152C40;
+    background-color: #0d77d3;
     color: white;
   }
   
   .saveBtn i:hover {
     font-size: 25px;
     transition: all .3s ease-in-out;
+    background-color: rgb(247, 247, 38);
+    color: tomato;
   }

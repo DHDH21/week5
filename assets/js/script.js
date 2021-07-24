@@ -9,53 +9,44 @@ function setDateTime() {
 setDateTime();
 
 
-
-//save btn
-
-var saveBtn = $(".saveBtn");
+// timeline color
 
 function timeLineColor() {
-    var hour = moment().hours();
+    var currentHour = moment().hours();
 
     $(".time-block").each(function() {
-        var currentHour = parseInt($(this).attr("id"));
-
-        if (currentHour > hour) {
-            $(this).addClass("future");
+        if (blockHour < currentHour) {
+            $(this).addClass("past");
+            $(this).removeClass("future");
+            $(this).removeClass("present");
         }
-        else if (currentHour === hour) {
+        else if (blockHour === currentHour) {
+            $(this).removeClass("past");
             $(this).addClass("present");
+            $(this).removeClass("future");
         }
         else {
-            $(this).addClass("past");
+            $(this).removeClass("present");
+            $(this).removeClass("past");
+            $(this).addClass("future");
         }
     })
-};
+}
+timeLineColor(); //re-run function
+
 
 // click to save button
 
-saveBtn.on("click", function() {
+$(document).ready(function(){
 
-    var time = $(this).siblings(".hour").text();
-    var plan = $(this).siblings(".plan").val();
+    $(".saveBtn").on("click", function() {
+        var value = $(this).siblings(".description").val();
+        var time = $(this).parent().attr("id");
 
-    localStorage.setItem(time. plan);
-});
+        //save to localStorage
+        localStorage.setItem(time, value);
+    });
+})
 
 // save events
 
-function updatePlan() {
-
-    $(".hour").each(function() {
-        var currentHour = $(this).text();
-        var updatedPlan = localStorage.getItem(currentHour);
-
-        if(updatedPlan !== null) {
-            $(this).siblings(".plan").val(updatedPlan);
-        }
-    });
-
-}
-
-timeLineColor();
-updatePlan();
